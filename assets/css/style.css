@@ -1,0 +1,59 @@
+/*Elements*/
+h1{
+    text-align: center;
+}
+h2{
+    font-weight: bold;
+}
+h3{
+    text-align: center;
+}
+cityInformation{
+    display: flex;
+    stroke: black;
+}
+Searches{
+
+}
+header{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+form {
+    margin: 20%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+button{
+    margin-top: 10px;
+    color:white;
+    background-color: aqua;
+    border-style: none;
+    border-radius: 10px;
+    min-width: 100%;
+}
+
+#cityInformation{
+    border: 1px solid black;
+}
+#fiveDay{
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+#forecast{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column-reverse;
+}
+#forcastCards{
+}
+.cityStats{
+    margin-left:10px;
+}
+.cityWeather{
+}
+.card{
+}
+.citySearches{
+    text-align: center;
+}
