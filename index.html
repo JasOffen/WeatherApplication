@@ -20,70 +20,46 @@
             <div class="col-2 ">
                 <h3>Search for a city:</h3>
                 <form>
-                    <input id="searchForm" name="search" palceholder="San Diego" />
+                    <input id="searchForm" name="search" placeholder="San Diego" />
                     <button type="submit" id="citySearch" name="searchButton">Search</button>
                 </form>
-                <Searches>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
-                    <div class="citySearches">
-                        test
-                    </div>
+                <Searches id="searchList">
                 </Searches>
             </div>
             <div class="col-10" id="cityWeather">
-                <h2 class="cityStats">Placeholder</h2>
+                <h2 class="cityStats" id="cityName">Placeholder</h2>
                 <p class="cityStats">test1</p>
                 <p class="cityStats">test2</p>
                 <p class="cityStats">test3</p>
                 <p class="cityStats">test4</p>
 
-                <section id="forecast">
-                    <div class="fiveDay">
-                        <h4>5 Day Forecast:</h4>
-                        <div id="forecastCards col-10">
-                            <p id="col-2">1</p>
-                            <p id="col-2">1</p>
-                            <p>1</p>
-                            <p>1</p>
-                            <p>1</p>
-                        </div>
-                </section>
-
-            </div>
         </cityInformation>
+        <div class="fiveDay">
+            <h4>5 Day Forecast:</h4>
+            <div class="col-7" id="forecastCards">
+                <div class="card">
+                    <p>Date</p>
+                    <img />
+                    <p>Temp:</p>
+                    <p>Wind:</p>
+                    <p>Humidity</p>
+                </div>
+                <div class="card">
+                    <p>test</p>
+                </div>
+                <div class="card">
+                    <p>test</p>
+                </div>
+                <div class="card">
+                    <p>test</p>
+                </div>
+                <div class="card">
+                    <p>test</p>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/javascript/script.js"></script>
 </body>
 
