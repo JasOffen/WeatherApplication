@@ -1,6 +1,8 @@
 var searchButtonEl = document.querySelector("#citySearch");
 var searchListEl = document.querySelector("#searchList")
 var cityNameEl = document.querySelector("#cityName")
+var newCitySearch;
+var currentDate = new Date();
 
 var updateSearchHistory = function (event) {
     event.preventDefault();
@@ -8,12 +10,12 @@ var updateSearchHistory = function (event) {
     //creating elements
     var newSearchHistory = document.createElement('div');
     var newSearchValueEl = document.createElement('p');
-    var newCitySearch = document.getElementById("searchForm").value;
+    newCitySearch = document.getElementById("searchForm").value;
 
     //classes
     newSearchHistory.setAttribute("class", "citySearches")
     newSearchValueEl.innerHTML = newCitySearch;
-    cityNameEl.innerHTML = newCitySearch;
+    cityNameEl.innerHTML = newCitySearch + "(" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + ")";
 
 
 
@@ -21,21 +23,26 @@ var updateSearchHistory = function (event) {
     searchListEl.prepend(newSearchHistory);
     newSearchHistory.appendChild(newSearchValueEl);
 
+    //getAPIData();
 }
 
 
+function getAPIData() {
+    var requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + newCitySearch + '&units=imperial' + '&appid=9221d865d32d6411009be013bcda09f9'
+    fetch(requestURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data.main.temp);
+        });
 
-
-
-
-function testt() {
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=-32.2226&lon=-110.9747&appid=9221d865d32d6411009be013bcda09f9')
-        .then(response => response.json())
-        .then(data => console.log(data));
+    updateCityWeather();
 }
 
-//testt();
+function updateCityWeather() {
 
+}
 
 
 searchButtonEl.addEventListener("click", updateSearchHistory);
