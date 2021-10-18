@@ -1,13 +1,18 @@
 var searchButtonEl = document.querySelector("#citySearch");
-var searchListEl = document.querySelector("#searchList")
-var cityNameEl = document.querySelector("#cityName")
-var newCitySearch;
-var currentDate = new Date();
+var searchListEl = document.querySelector("#searchList");
+var cityNameEl = document.querySelector("#cityName");
 var apiKey = "9221d865d32d6411009be013bcda09f9";
+var currentDate = new Date();
+var searchID = 0
 var responseUrl;
 var responseWeather;
 var cityLat;
 var cityLong;
+var historyCount;
+var newSearchValueEl;
+var newSearchHistory;
+var searchLimit;
+var newCitySearch;
 
 var updateSearchHistory = function (event, isHistory) {
     if (isHistory === true) {
@@ -17,13 +22,14 @@ var updateSearchHistory = function (event, isHistory) {
         event.preventDefault();
 
         //creating elements
-        var newSearchHistory = document.createElement('div');
-        var newSearchValueEl = document.createElement('button');
+        newSearchHistory = document.createElement('div');
+        newSearchValueEl = document.createElement('button');
         newCitySearch = document.getElementById("searchForm").value;
 
         //classes
         newSearchHistory.setAttribute("class", "citySearches")
         //newSearchValueEl.setAttribute("type", "submit")
+        newSearchValueEl.setAttribute("id", "1");
         newSearchValueEl.innerHTML = newCitySearch;
         cityNameEl.innerHTML = newCitySearch + "(" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + ")";
 
@@ -39,7 +45,19 @@ var updateSearchHistory = function (event, isHistory) {
         searchHistoryEl.addEventListener("click", searchFromHistory);
 
         document.getElementById("searchForm").value = "";
+        limitHistory();
     }
+}
+
+function limitHistory() {
+    newSearchValueEl.setAttribute("id", searchID);
+    console.log(searchID)
+    searchID++;
+
+    searchLimit = searchID - 10;
+    document.getElementById(searchLimit).setAttribute("style", "display:none;");
+
+
 }
 
 function getAPILatLongData() {
@@ -86,6 +104,7 @@ function updateCityWeather() {
     cityStatsUV.textContent = "UV Index: " + responseWeather.current.uvi;
 
 }
+
 function searchFromHistory(event) {
     newCitySearch = event.target.textContent;
     updateSearchHistory(event.target.textContent, true);
