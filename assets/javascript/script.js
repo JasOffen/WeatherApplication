@@ -13,6 +13,7 @@ var newSearchValueEl;
 var newSearchHistory;
 var searchLimit;
 var newCitySearch;
+var requestfiveDayUrl;
 
 var updateSearchHistory = function (event, isHistory) {
     if (isHistory === true) {
@@ -88,6 +89,51 @@ function getAPIWeather() {
         .then(function (data) {
             responseWeather = data;
             updateCityWeather();
+            fiveDayForecast();
+        });
+}
+
+function fiveDayForecast() {
+    requestfiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + newCitySearch + '&units=imperial&appid=' + apiKey;
+
+    fetch(requestfiveDayUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            for (var i = 1; i <= 5; i++) {
+                console.log(i);
+                //creating elements
+                var cardParent = document.getElementById('forecastCards');
+                var newCardDiv = document.createElement('div');
+                var newCardDate = document.createElement('p');
+                var newCardIcon = document.createElement('img');
+                var newCardTemp = document.createElement('p');
+                var newCardWind = document.createElement('p');
+                var newCardHumidity = document.createElement('p');
+
+                //setting attributes
+                newCardDiv.setAttribute('class', 'card');
+                newCardDate.setAttribute('class', 'date');
+                newCardIcon.setAttribute('class', 'icon');
+                newCardTemp.setAttribute('class', 'temp');
+                newCardWind.setAttribute('class', 'wind');
+                newCardHumidity.setAttribute('class', 'humidity');
+
+                //writing content
+                newCardDate.textContent = "Date: ";
+                newCardTemp.textContent = "Temp: " + data.list[i].main.temp_max + ' / ' + data.list[i].main.temp_min;
+                newCardWind.textContent = "Wind: ";
+                newCardHumidity.textContent = "Humidity: ";
+
+                //append children to the DOM
+                newCardDiv.appendChild(newCardDate);
+                newCardDiv.appendChild(newCardIcon);
+                newCardDiv.appendChild(newCardTemp);
+                newCardDiv.appendChild(newCardWind);
+                newCardDiv.appendChild(newCardHumidity);
+                cardParent.append(newCardDiv);
+            }
         });
 }
 
