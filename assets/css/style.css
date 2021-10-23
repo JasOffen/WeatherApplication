@@ -10,6 +10,7 @@ h3{
 }
 cityInformation{
     display: flex;
+    flex-wrap: nowrap;
     stroke: black;
     justify-content: space-between;
 }
@@ -44,8 +45,6 @@ input{
 .cityStats{
     margin-left:10px;
 }
-.cityWeather{
-}
 .card{
     background: steelblue;
     padding-right: 20px;
@@ -66,3 +65,19 @@ input{
 .searchbar{
     padding-right: 20px;
 }
+
+@media only screen and (max-width: 767px) {
+    cityInformation{
+        flex-wrap: wrap;
+    }
+    #cityWeather{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .fiveDay{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  }

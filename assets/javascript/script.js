@@ -144,6 +144,7 @@ function fiveDayForecast() {
 
                 //writing content
                 newCardDate.textContent = "Date: " + data.list[i].dt_txt;
+                newCardIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + "@2x.png");
                 newCardTemp.textContent = "Temp: " + data.list[i].main.temp_max + ' / ' + data.list[i].main.temp_min;
                 newCardWind.textContent = "Wind: " + data.list[i].wind.speed + " mph";
                 newCardHumidity.textContent = "Humidity: " + data.list[i].main.humidity + "%";
