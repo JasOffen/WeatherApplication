@@ -14,6 +14,7 @@ var newSearchHistory;
 var searchLimit;
 var newCitySearch;
 var requestfiveDayUrl;
+var generateForecastCards = 0;
 
 var updateSearchHistory = function (event, isHistory) {
     if (isHistory === true) {
@@ -57,8 +58,6 @@ function limitHistory() {
 
     searchLimit = searchID - 10;
     document.getElementById(searchLimit).setAttribute("style", "display:none;");
-
-
 }
 
 function getAPILatLongData() {
@@ -102,38 +101,65 @@ function fiveDayForecast() {
         })
         .then(function (data) {
             for (var i = 1; i <= 5; i++) {
-                console.log(i);
+                console.log(data);
                 //creating elements
-                var cardParent = document.getElementById('forecastCards');
-                var newCardDiv = document.createElement('div');
-                var newCardDate = document.createElement('p');
-                var newCardIcon = document.createElement('img');
-                var newCardTemp = document.createElement('p');
-                var newCardWind = document.createElement('p');
-                var newCardHumidity = document.createElement('p');
+
+                if (generateForecastCards == 0) {
+                    var cardParent = document.getElementById('forecastCards');
+                    var newCardDiv = document.createElement('div');
+                    var newCardDate = document.createElement('p');
+                    var newCardIcon = document.createElement('img');
+                    var newCardTemp = document.createElement('p');
+                    var newCardWind = document.createElement('p');
+                    var newCardHumidity = document.createElement('p');
+                    //setting attributes for cards to be generated
+                    newCardDiv.setAttribute('class', 'card');
+                    newCardDiv.setAttribute('id', 'card ' + i);
+                } else {
+                    var newCardDate = document.getElementById('date ' + i);
+                    var newCardIcon = document.getElementById('icon ' + i);
+                    var newCardTemp = document.getElementById('temp ' + i);
+                    var newCardWind = document.getElementById('wind ' + i);
+                    var newCardHumidity = document.getElementById('humidity ' + i);
+                    console.log("test")
+                }
 
                 //setting attributes
-                newCardDiv.setAttribute('class', 'card');
+
                 newCardDate.setAttribute('class', 'date');
+                newCardDate.setAttribute('id', 'date ' + i);
+
+
                 newCardIcon.setAttribute('class', 'icon');
+                newCardIcon.setAttribute('id', 'icon ' + i);
+
                 newCardTemp.setAttribute('class', 'temp');
+                newCardTemp.setAttribute('id', 'temp ' + i);
+
                 newCardWind.setAttribute('class', 'wind');
+                newCardWind.setAttribute('id', 'wind ' + i);
+
                 newCardHumidity.setAttribute('class', 'humidity');
+                newCardHumidity.setAttribute('id', 'humidity ' + i);
 
                 //writing content
-                newCardDate.textContent = "Date: ";
+                newCardDate.textContent = "Date: " + data.list[i].dt_txt;
                 newCardTemp.textContent = "Temp: " + data.list[i].main.temp_max + ' / ' + data.list[i].main.temp_min;
-                newCardWind.textContent = "Wind: ";
-                newCardHumidity.textContent = "Humidity: ";
+                newCardWind.textContent = "Wind: " + data.list[i].wind.speed + " mph";
+                newCardHumidity.textContent = "Humidity: " + data.list[i].main.humidity + "%";
 
-                //append children to the DOM
-                newCardDiv.appendChild(newCardDate);
-                newCardDiv.appendChild(newCardIcon);
-                newCardDiv.appendChild(newCardTemp);
-                newCardDiv.appendChild(newCardWind);
-                newCardDiv.appendChild(newCardHumidity);
-                cardParent.append(newCardDiv);
+                if (generateForecastCards == 0) {
+                    //append children to the DOM
+                    newCardDiv.appendChild(newCardDate);
+                    newCardDiv.appendChild(newCardIcon);
+                    newCardDiv.appendChild(newCardTemp);
+                    newCardDiv.appendChild(newCardWind);
+                    newCardDiv.appendChild(newCardHumidity);
+                    cardParent.append(newCardDiv);
+                }
+                //remove children
             }
+            generateForecastCards = 1;
         });
 }
 
